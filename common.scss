@@ -1,0 +1,129 @@
+@mixin fullPage {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.huge {
+  // for testing
+  font-size: 8rem;
+  color: rgb(146, 143, 143);
+  width: 100%;
+  padding: 20px;
+}
+
+@mixin scaffolding {
+  // children of html
+
+  overflow: auto;
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  .content {
+    flex: 1 0 auto;
+  }
+  footer {
+    flex-shrink: 0;
+  }
+}
+
+@mixin border1 {
+  border: 1px solid #999;
+}
+
+@mixin button1 {
+  background-color: #fff;
+  padding: 7px;
+  border-radius: 5px;
+  cursor: pointer;
+  @include border1;
+  &:hover {
+    background-color: #ddd2d2;
+  }
+}
+@mixin table {
+  border-spacing: 0;
+}
+
+@mixin border1($size: 1px, $color: #999) {
+  border: $size solid $color;
+}
+
+@mixin alt($color: #cfcfcf) {
+  &:nth-child(even) {
+    background-color: $color;
+  }
+}
+
+.huge {
+  font-size: 5rem;
+}
+
+@mixin iconButton($colour1: #7e7e7e) {
+  cursor: pointer;
+  color: $colour1;
+  &:hover {
+    color: darken($colour1, 30%);
+  }
+}
+
+@mixin iconDisplay {
+  cursor: normal;
+}
+
+@mixin push--auto($width) {
+  max-width: $width;
+  margin: {
+    left: auto;
+    right: auto;
+  }
+}
+.modalBg {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.7);
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 101;
+}
+@mixin exact-link($col: #000, $bgcol: #ccc) {
+  background: $bgcol;
+  // border-radius: 4px;
+  color: $col;
+  // width: 100%;
+}
+@mixin modalContent($top: 10%, $width: 90%, $max-width: 600px) {
+  position: fixed;
+  top: $top;
+  width: $width;
+  max-width: $max-width;
+  left: 50%;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  // height: 80vh;
+  overflow: auto;
+
+  -webkit-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+  z-index: 102;
+}
+@mixin centerItem {
+  margin-left: auto;
+  margin-right: auto;
+}

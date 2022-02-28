@@ -1,0 +1,191 @@
+$banner: darken(lightblue, 50);
+$banner2: darken(lightblue, 40);
+$banner3: darken(lightblue, 30);
+$lightblue: darken(lightblue, 10);
+$lightblue1a: darken(lightblue, 5);
+$blue1a: lighten(lightblue, 5);
+$blue2a: lighten(lightblue, 9);
+$appbg: lighten(lightblue, 15);
+$green1a: lighten(green, 20);
+$green2a: lighten(green, 50);
+$green3a: lighten(green, 60);
+$red1a: lighten(red, 10);
+$red2a: lighten(red, 15);
+$red3a: lighten(red, 20);
+$red4a: lighten(red, 25);
+$purple1a: lighten(purple, 20);
+$purple2a: lighten(purple, 30);
+$purple3a: lighten(purple, 40);
+$purple4a: lighten(purple, 50);
+$purple5a: lighten(purple, 60);
+$yellow1a: lighten(yellow, 20);
+$yellow2a: lighten(yellow, 25);
+$yellow3a: lighten(yellow, 30);
+$yellow4a: lighten(yellow, 35);
+$gray1a: lighten(gray, 5);
+$gray2a: lighten(gray, 10);
+$gray3a: lighten(gray, 15);
+$gray4a: lighten(gray, 35);
+$gray1: gray;
+$gray2: darken(gray, 5);
+$gray3: darken(gray, 10);
+$gray4: darken(gray, 15);
+$gray5: darken(gray, 20);
+
+@mixin push--auto($width) {
+    max-width: $width;
+    margin: {
+        left: auto;
+        right: auto;
+    }
+}
+@mixin modalBg {
+  position: fixed;
+  background-color: rgba(0,0,0,.7);
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 101;
+}
+@mixin exact-link($col: #000, $bgcol: #ccc) {
+    background: $bgcol;
+    // border-radius: 4px;
+    color: $col;
+    // width: 100%;
+}
+@mixin modalContent($top: 10%, $width: 90%, $max-width: 600px) {
+  position: fixed;
+  top: $top;
+  width: $width;
+  max-width: $max-width;
+  left: 50%;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  height: 80vh;
+  overflow: auto;
+
+  -webkit-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+  z-index: 102;
+}
+@mixin landing ($img) {
+  // h4, h5 {
+  //   letter-spacing: 12px!important;
+  //   font-family: monospace;
+  // }
+  // h6 {
+  //   font-family: Courier;
+  // }
+  height: 100vh;
+  background-image: url($img);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  // div {
+  //   position: absolute;
+  //   top: 30%;
+  //   padding-left: 20px;
+  //
+  // }
+  // h4, h5, h6 {
+  //   color: #fff;
+  // }
+}
+@mixin lineHeight($h:50px,$l:50px) {
+  height: $h;
+  line-height: $l;
+}
+@mixin table-price() {
+  padding: 10px;
+  &:last-child {
+    width: 70px;
+    text-align: right;
+  }
+}
+
+
+
+// When using ::before and ::after you'll always need these three, so we're saving two lines of code every time you use this.
+@mixin pseudo($display: block, $pos: absolute, $content: ''){
+    content: $content;
+    display: $display;
+    position: $pos;
+}
+
+// Responsive ratio
+// We use this for creating scalable elements (usually images / background images) that maintain a ratio.
+@mixin responsive-ratio($x,$y, $pseudo: false) {
+    $padding: unquote( ( $y / $x ) * 100 + '%' );
+    @if $pseudo {
+        &:before {
+            @include pseudo($pos: relative);
+            width: 100%;
+            padding-top: $padding;
+        }
+    } @else {
+        padding-top: $padding;
+    }
+}
+
+// This mixin takes all the hassle out of creating that triangle you'll see coming out of most traditional tooltips, all without images, you just specify it's colour, how big you want it, the direction it's going to come out of your element and you're done!
+@mixin css-triangle($color, $direction, $size: 6px, $position: absolute, $round: false){
+    @include pseudo($pos: $position);
+    width: 0;
+    height: 0;
+    @if $round {
+        border-radius: 3px;
+    }
+    @if $direction == down {
+        border-left: $size solid transparent;
+        border-right: $size solid transparent;
+        border-top: $size solid $color;
+        margin-top: 0 - round( $size / 2.5 );
+    } @else if $direction == up {
+        border-left: $size solid transparent;
+        border-right: $size solid transparent;
+        border-bottom: $size solid $color;
+        margin-bottom: 0 - round( $size / 2.5 );
+    } @else if $direction == right {
+        border-top: $size solid transparent;
+        border-bottom: $size solid transparent;
+        border-left: $size solid $color;
+        margin-right: -$size;
+    } @else if  $direction == left {
+        border-top: $size solid transparent;
+        border-bottom: $size solid transparent;
+        border-right: $size solid $color;
+        margin-left: -$size;
+    }
+}
+
+// They're a pain as you have to set the style in all the separate formats, this sorts it for you.
+@mixin input-placeholder {
+    &.placeholder { @content; }
+    &:-moz-placeholder { @content; }
+    &::-moz-placeholder { @content; }
+    &:-ms-input-placeholder { @content; }
+    &::-webkit-input-placeholder { @content; }
+}
+
+// Set a rem font size with pixel fallback
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}

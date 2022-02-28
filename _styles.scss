@@ -10,6 +10,12 @@
   background-position: left;
   background-attachment: fixed;
 }
+@mixin bgImage {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
 .huge {
   // for testing
   font-size: 8rem;
